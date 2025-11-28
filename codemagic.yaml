@@ -4,12 +4,6 @@ workflows:
     max_build_duration: 60
     environment:
       flutter: stable
-      vars:
-        # Cambia estos valores si quieres firmar la app para Google Play
-        ANDROID_KEYSTORE: ""  # deja vacío si no firmas
-        ANDROID_KEYSTORE_PASSWORD: ""
-        ANDROID_KEY_ALIAS: ""
-        ANDROID_KEY_PASSWORD: ""
     scripts:
       - name: Get dependencies
         script: |
@@ -26,4 +20,9 @@ workflows:
       #     flutter build appbundle --release
     artifacts:
       - budget/build/app/outputs/flutter-apk/*.apk
-      # Para .aab, cambia la línea a
+      # Para .aab, cambia la línea anterior a:
+      # - budget/build/app/outputs/bundle/release/*.aab
+    publishing:
+      email:
+        recipients:
+          - tuemail@ejemplo.com
