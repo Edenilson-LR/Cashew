@@ -6,10 +6,10 @@ workflows:
       flutter: stable
       vars:
         # Cambia estos valores si quieres firmar la app para Google Play
-        ANDROID_KEYSTORE: En blanco si no firmas
-        ANDROID_KEYSTORE_PASSWORD: En blanco si no firmas
-        ANDROID_KEY_ALIAS: En blanco si no firmas
-        ANDROID_KEY_PASSWORD: En blanco si no firmas
+        ANDROID_KEYSTORE: ""  # deja vacío si no firmas
+        ANDROID_KEYSTORE_PASSWORD: ""
+        ANDROID_KEY_ALIAS: ""
+        ANDROID_KEY_PASSWORD: ""
     scripts:
       - name: Get dependencies
         script: |
@@ -26,11 +26,4 @@ workflows:
       #     flutter build appbundle --release
     artifacts:
       - budget/build/app/outputs/flutter-apk/*.apk
-      # Para .aab, cambia la línea anterior a:
-      # - budget/build/app/outputs/bundle/release/*.aab
-    publishing:
-      email:
-        recipients:
-          - tuemail@ejemplo.com
-        on_success: always
-        on_failure: always
+      # Para .aab, cambia la línea a
