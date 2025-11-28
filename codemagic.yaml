@@ -1,0 +1,36 @@
+workflows:
+  cashew-workflow:
+    name: Cashew Workflow
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      vars:
+        # Cambia estos valores si quieres firmar la app para Google Play
+        ANDROID_KEYSTORE: En blanco si no firmas
+        ANDROID_KEYSTORE_PASSWORD: En blanco si no firmas
+        ANDROID_KEY_ALIAS: En blanco si no firmas
+        ANDROID_KEY_PASSWORD: En blanco si no firmas
+    scripts:
+      - name: Get dependencies
+        script: |
+          cd budget
+          flutter pub get
+      - name: Build APK
+        script: |
+          cd budget
+          flutter build apk --release
+      # Para app bundle (.aab) en vez de APK, descomenta la siguiente línea
+      # - name: Build App Bundle
+      #   script: |
+      #     cd budget
+      #     flutter build appbundle --release
+    artifacts:
+      - budget/build/app/outputs/flutter-apk/*.apk
+      # Para .aab, cambia la línea anterior a:
+      # - budget/build/app/outputs/bundle/release/*.aab
+    publishing:
+      email:
+        recipients:
+          - tuemail@ejemplo.com
+        on_success: always
+        on_failure: always
